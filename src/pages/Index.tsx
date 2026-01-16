@@ -13,12 +13,12 @@ import Footer from "@/components/Footer";
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFilters, setSearchFilters] = useState<string[]>(["all"]);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   const handleSearch = (query: string, filters: string[]) => {
     setSearchQuery(query);
     setSearchFilters(filters);
-    setHasSearched(query.trim().length > 0);
+    setShowResults(true);
   };
 
   return (
@@ -28,7 +28,7 @@ const Index = () => {
         <Hero />
         <CenterSearch onSearch={handleSearch} />
         <CitizenServices />
-        {hasSearched && (
+        {showResults && (
           <CenterResults query={searchQuery} filters={searchFilters} />
         )}
         <Features />
