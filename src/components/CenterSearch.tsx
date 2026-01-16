@@ -19,13 +19,18 @@ const CenterSearch = ({ onSearch }: CenterSearchProps) => {
   const [activeFilters, setActiveFilters] = useState<string[]>(["all"]);
 
   const toggleFilter = (filterId: string) => {
+    let newFilters: string[];
     if (filterId === "all") {
-      setActiveFilters(["all"]);
+      newFilters = ["all"];
+      setActiveFilters(newFilters);
+      onSearch(query, newFilters);
     } else {
-      const newFilters = activeFilters.includes(filterId)
+      newFilters = activeFilters.includes(filterId)
         ? activeFilters.filter((f) => f !== filterId)
         : [...activeFilters.filter((f) => f !== "all"), filterId];
-      setActiveFilters(newFilters.length === 0 ? ["all"] : newFilters);
+      newFilters = newFilters.length === 0 ? ["all"] : newFilters;
+      setActiveFilters(newFilters);
+      onSearch(query, newFilters);
     }
   };
 

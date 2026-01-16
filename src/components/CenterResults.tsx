@@ -85,9 +85,10 @@ const mockCenters: Center[] = [
 const CenterResults = ({ query, filters }: CenterResultsProps) => {
   // Filter centers based on query and filters
   const filteredCenters = mockCenters.filter((center) => {
-    // Query matching
-    const queryLower = query.toLowerCase();
+    // Query matching - if query is empty, show all
+    const queryLower = query.toLowerCase().trim();
     const matchesQuery =
+      queryLower === "" ||
       center.name.toLowerCase().includes(queryLower) ||
       center.city.toLowerCase().includes(queryLower) ||
       center.pincode.includes(query) ||
